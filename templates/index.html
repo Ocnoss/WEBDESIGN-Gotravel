@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Ribeye&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='owlcarousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='owlcarousel/owl.theme.default.min.css') }}">
+    <!-- Include Leaflet style file -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Include FontAwesome style file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script src="https://kit.fontawesome.com/e0492258dd.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <title>GoTravel</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-fon">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-expand-lg navbar-dark">
+                            <div class="container mt-3 menu">
+                                <a class="navbar-brand display-6 logo" href="#">GoTravel</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-end " id="collapsibleNavbar">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item menu">
+                                            <a id = "personalplace" class="nav-link active px-4" href="/home">个人中心</a>
+                                        </li>
+                                    </ul>
+                                    <button id = "LR" type="button" class="btn btn-danger px-4 py-2 button-1" onclick="LR()">登录 | 注册</button>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-flex">
+                            <div class="second-flex">
+                                <div class="title">
+                                    <h1 class="heading-1">随心而行<br> 步向未知的诗和远方</h1>
+                                    <p class="text-1">旅行，是心灵的独白，是梦想的延伸。在每一次的行走中，我们都是故事的主人，<br>用心感受那些美好瞬间，将它们串联成生命中最美的记忆。</p>
+                                    <button id = "randomgo" type="button" class="btn btn-danger px-4 py-2 button-2" onclick=" randomgo()">说走就走</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <br><br>
+    
+    <section>
+        <div id="map"></div>
+    </section>
+
+    <section>
+        <h1 class="display-5 text-center heading-2">美景一览</h1>
+        <p class="text-center text-2"><br>愿你的旅途充满阳光和微风，愿每一步都是一首优美的诗篇。</p><br>
+        <div class="container">
+            <div class="owl-carousel owl-theme owl-loaded">
+                <div>
+                    <img src="{{ url_for('static', filename='image/Newyork.jpg') }}" alt="NewYork">
+                    <h3>Times Square</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 纽约 </span> <i class="fas fa-star star"></i> 4.8<br>    
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='image/Beijing.jpg') }}" alt="Beijing">
+                    <h3>The Great Wall</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 北京</span> <i class="fas fa-star star"></i> 4.9<br>
+                    
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='image/Shanghai.jpg') }}" alt="Shanghai">
+                    <h3>The Bund</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 上海</span> <i class="fas fa-star star"></i> 4.8<br>
+                    
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='image/Tokyo.jpg') }}" alt="Tokyo">
+                    <h3>Mount Fuji</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 东京</span> <i class="fas fa-star star"></i> 4.7<br>
+                    
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='image/London.jpg') }}" alt="London">
+                    <h3>St. Paul's Cathedral</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 伦敦</span> <i class="fas fa-star star"></i> 4.7<br>
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='image/Dusanbe.jpg') }}" alt="Dusanbe">
+                    <h3>Iskandarkul</h3> 
+                    <i class="fas fa-map-marker-alt map"></i><span class="text-3"> 杜尚别</span> <i class="fas fa-star star"></i> 4.8<br>
+                    <br>
+                </div>
+            </div>
+        </div>  
+    </section>
+
+    <br><br>
+
+    <footer>
+        <div class="container">
+            <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-4">
+                <div class="col mb-4">                  
+                    <ul class="navbar-nav footer">
+                        <p style="font-family: 'Ribeye', cursive;">Trevland</p>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#">联系我们</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#">@shovasatkhira88.com</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#">13319802030</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='libs/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>    
+
+</body>
+</html>

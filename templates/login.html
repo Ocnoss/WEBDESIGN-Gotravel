@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("{{ url_for('static', filename='image/login.jpg') }}");
+            background-size: cover;
+        }
+
+        .form-container {
+            text-align: center;
+            width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        {##message {#}
+        {#   margin-top: 10px;#}
+        {#   font-size: 16px;#}
+        {##}
+    </style>
+
+    <!-- 引入 Axios 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div class="form-container" id="login-form">
+        <h2 id="form-title">登录</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="button" onclick="submitLogin()">登录</button>
+            <br>
+            <!-- 切换按钮 -->
+            <button type="button" onclick="toggleForm()">切换注册</button>
+        </form>
+    </div>
+
+    <script>
+        async function submitLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "" || password === "") {
+                alert("用户名或密码空缺，请重新填写");
+                return;
+            }
+
+            const server_address = 'http://127.0.0.1:5000'
+            try {
+                const response = await axios.post(`${server_address}/login`, { username, password },{
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if(response.status === 200)
+                {
+                    localStorage.setItem('token',username)
+                    alert("登录成功！");
+                    window.location.href = "/";
+                }
+            } catch (error) {
+                if (error.response) {
+                    // 服务器返回的错误
+                    if (error.response.status === 400) {
+                        alert("该用户不存在");
+                    } else if (error.response.status === 401) {
+                        alert("密码错误！");
+                    }
+                } else {
+                    // 其他错误
+                    alert("登录时发生错误，请稍后再试。");
+                }
+            }
+        }
+
+        function toggleForm() {
+            window.location.href = "/register";
+        }
+    </script>
+
+</body>
+
+</html>
